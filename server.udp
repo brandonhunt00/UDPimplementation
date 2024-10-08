@@ -1,0 +1,18 @@
+import socket
+
+# Criando o socket UDP
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Associando o socket ao endereço e porta
+server_socket.bind(('localhost', 12345))
+print("Servidor UDP escutando na porta 12345...")
+
+# Recebendo dados do cliente
+data, addr = server_socket.recvfrom(1024)
+print(f"Mensagem recebida de {addr}: {data.decode()}")
+
+# Enviando resposta para o cliente
+server_socket.sendto(b'Hello World!', addr)
+
+# Fechando o socket
+server_socket.close()
